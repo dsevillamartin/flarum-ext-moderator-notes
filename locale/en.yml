@@ -6,7 +6,7 @@ datitisev-moderator-notes:
 
     moderate_post:
       title: Moderate Post
-      submit_button: => flarum-flags.ref.flag_post
+      submit_button: Add A Moderation Note
       dismiss_button: => core.ref.okay
 
       reason:
