@@ -1,0 +1,20 @@
+datitisev-moderator-notes:
+  forum:
+    post:
+      moderate_button: Moderation Notes
+
+
+    moderate_post:
+      title: Moderate Post
+      submit_button: => flarum-flags.ref.flag_post
+      dismiss_button: => core.ref.okay
+
+      reason:
+        off_topic_label: "Off-topic"
+        off_topic_text: This post is not relevant to the current discussion and should be moved elsewhere.
+        inappropriate_label: Inappropriate
+        inappropriate_text: "This post is offensive, abusive, or violates our <a>community guidelines</a>."
+        other_label: Other
+        spam_label: Spam
+        spam_text: This post is an advertisement.
+
