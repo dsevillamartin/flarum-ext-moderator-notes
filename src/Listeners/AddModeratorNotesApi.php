@@ -9,8 +9,8 @@
 
 namespace Datitisev\ModeratorNotes\Listeners;
 
-use Datitisev\ModeratorNotes\ModeratorNotes;
 use Datitisev\ModeratorNotes\Api\Controller;
+use Datitisev\ModeratorNotes\ModeratorNotes;
 use Flarum\Api\Serializer\CurrentUserSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Api\Serializer\PostSerializer;
