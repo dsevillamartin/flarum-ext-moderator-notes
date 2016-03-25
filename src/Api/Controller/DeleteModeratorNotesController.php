@@ -1,15 +1,12 @@
 <?php
 
-
 namespace Datitisev\ModeratorNotes\Api\Controller;
 
 use Flarum\Api\Controller\AbstractDeleteController;
-use Datitisev\ModeratorNotes\Command\DeleteModeratorNotes;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 
-
-class DeleteModeratorNotes extends AbstractDeleteController
+class DeleteModeratorNotesController extends AbstractDeleteController
 {
     /**
      * @var Dispatcher
@@ -30,7 +27,7 @@ class DeleteModeratorNotes extends AbstractDeleteController
     protected function delete(ServerRequestInterface $request)
     {
         $this->bus->dispatch(
-            new DeleteModeratorNotes(array_get($request->getQueryParams(), 'id'), $request->getAttribute('actor'), $request->getParsedBody())
+            new self(array_get($request->getQueryParams(), 'id'), $request->getAttribute('actor'), $request->getParsedBody())
         );
     }
 }

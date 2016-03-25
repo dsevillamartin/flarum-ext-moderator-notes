@@ -2,13 +2,12 @@
 
 namespace Datitisev\ModeratorNotes\Command;
 
+use Datitisev\ModeratorNotes\Event\ModeratorNotesWillBeDeleted;
 use Flarum\Core\Access\AssertPermissionTrait;
 use Flarum\Core\Repository\PostRepository;
-use Datitisev\ModeratorNotes\Event\ModeratorNotesWillBeDeleted;
-use Datitisev\ModeratorNotes\Flag;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class DeleteFlagsHandler
+class DeleteModeratorNotesHandler
 {
     use AssertPermissionTrait;
 
@@ -24,7 +23,7 @@ class DeleteFlagsHandler
 
     /**
      * @param PostRepository $posts
-     * @param Dispatcher $events
+     * @param Dispatcher     $events
      */
     public function __construct(PostRepository $posts, Dispatcher $events)
     {
@@ -34,6 +33,7 @@ class DeleteFlagsHandler
 
     /**
      * @param DeleteModeratorNotes $command
+     *
      * @return ModeratorNotes
      */
     public function handle(DeleteModeratorNotes $command)
@@ -43,6 +43,7 @@ class DeleteFlagsHandler
         $this->assertCan($actor, 'viewFlags', $post->discussion);
         $this->events->fire(new ModeratorNotesWillBeDeleted($post, $actor, $command->data));
         $post->moderatorNotes()->delete();
+
         return $post;
     }
 }

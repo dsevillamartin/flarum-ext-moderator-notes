@@ -5,11 +5,9 @@ namespace Datitisev\ModeratorNotes\Command;
 use Flarum\Core\Access\AssertPermissionTrait;
 use Flarum\Core\Post\CommentPost;
 use Flarum\Core\Repository\PostRepository;
-use Datitisev\ModeratorNotes\ModeratorNotes;
 use Tobscure\JsonApi\Exception\InvalidParameterException;
 
-
-class CreateFlagHandler
+class CreateModeratorNoteHandler
 {
     use AssertPermissionTrait;
 
@@ -28,8 +26,10 @@ class CreateFlagHandler
 
     /**
      * @param CreateFlag $command
-     * @return ModeratorNote
+     *
      * @throws InvalidParameterException
+     *
+     * @return ModeratorNote
      */
     public function handle(CreateModeratorNote $command)
     {
@@ -39,8 +39,8 @@ class CreateFlagHandler
         $postId = array_get($data, 'relationships.post.data.id');
         $post = $this->posts->findOrFail($postId, $actor);
 
-        if (! ($post instanceof CommentPost)) {
-            throw new InvalidParameterException;
+        if (!($post instanceof CommentPost)) {
+            throw new InvalidParameterException();
         }
 
         $this->assertCan($actor, 'moderatePost', $post);
@@ -49,7 +49,7 @@ class CreateFlagHandler
 
         $moderatorNote = ModeratorNote::firstOrNew([
             'post_id' => $post->id,
-            'user_id' => $actor->id
+            'user_id' => $actor->id,
         ]);
 
         $moderatorNote->post_id = $post->id;
