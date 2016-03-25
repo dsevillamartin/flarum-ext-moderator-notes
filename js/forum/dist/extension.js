@@ -1,78 +1,75 @@
-System.register('datitisev/moderator-notes/addModerateAction', ['flarum/extend', 'flarum/app', 'flarum/components/Button', 'flarum/components/CommentPost', 'datitisev/moderator-notes/components/ModeratePostModal'], function (_export) {
-  'use strict';
+'use strict';
 
+System.register('datitisev/moderator-notes/addModerateAction', ['flarum/extend', 'flarum/app', 'flarum/components/Button', 'flarum/components/CommentPost', 'datitisev/moderator-notes/components/ModeratorNotesPostModal'], function (_export, _context) {
   var extend, app, Button, CommentPost, ModeratePostModal;
+
+  _export('default', function () {
+
+    extend(CommentPost.prototype, 'actionItems', function (items) {
+
+      var post = this.props.post;
+
+      items.add('moderator-notes', Button.component({
+        children: app.translator.trans('datitisev-moderator-notes.forum.post.moderate_button'),
+        className: 'Button Button--link',
+        onclick: function onclick() {
+
+          app.modal.show(new ModeratePostModal({ post: post }));
+        }
+      }));
+    });
+  });
+
   return {
     setters: [function (_flarumExtend) {
       extend = _flarumExtend.extend;
     }, function (_flarumApp) {
-      app = _flarumApp['default'];
+      app = _flarumApp.default;
     }, function (_flarumComponentsButton) {
-      Button = _flarumComponentsButton['default'];
+      Button = _flarumComponentsButton.default;
     }, function (_flarumComponentsCommentPost) {
-      CommentPost = _flarumComponentsCommentPost['default'];
-    }, function (_datitisevModeratorNotesComponentsModeratePostModal) {
-      ModeratePostModal = _datitisevModeratorNotesComponentsModeratePostModal['default'];
+      CommentPost = _flarumComponentsCommentPost.default;
+    }, function (_datitisevModeratorNotesComponentsModeratorNotesPostModal) {
+      ModeratePostModal = _datitisevModeratorNotesComponentsModeratorNotesPostModal.default;
     }],
-    execute: function () {
-      _export('default', function () {
-
-        extend(CommentPost.prototype, 'actionItems', function (items) {
-
-          var post = this.props.post;
-          console.log(post);
-
-          items.add('moderator-notes', Button.component({
-            children: app.translator.trans('datitisev-moderator-notes.forum.post.moderate_button'),
-            className: 'Button Button--link',
-            onclick: function onclick() {
-
-              app.modal.show(new ModeratePostModal({ post: post }));
-            }
-          }));
-        });
-      });
-    }
+    execute: function () {}
   };
 });;
-System.register('datitisev/moderator-notes/main', ['flarum/app', 'flarum/extend', 'datitisev/moderator-notes/addModerateAction'], function (_export) {
-	'use strict';
+// import Page from 'flarum/components/Page';
+//
+// // import ModeratorNotesList from 'datitisev/moderator-notes/components/ModeratorNotesList';
+//
+// /**
+//  * The `ModeratorNotesPage` component shows the moderation notes list. It is only
+//  * used on mobile devices where the flags dropdown is within the drawer.
+//  */
+//
+// export default class ModeratorNotesPage extends Page
+"use strict";
 
-	var app, extend, addModerateAction;
-	return {
-		setters: [function (_flarumApp) {
-			app = _flarumApp['default'];
-		}, function (_flarumExtend) {
-			extend = _flarumExtend.extend;
-		}, function (_datitisevModeratorNotesAddModerateAction) {
-			addModerateAction = _datitisevModeratorNotesAddModerateAction['default'];
-		}],
-		execute: function () {
-
-			app.initializers.add('datitisev-moderator-notes', function (app) {
-
-				addModerateAction();
-			});
-		}
-	};
+System.register("datitisev/moderator-notes/components/ModeratorNotesPage", [], function (_export, _context) {
+  return {
+    setters: [],
+    execute: function () {}
+  };
 });;
-System.register('datitisev/moderator-notes/components/ModeratePostModal', ['flarum/components/Modal', 'flarum/components/Button'], function (_export) {
-  'use strict';
+'use strict';
 
+System.register('datitisev/moderator-notes/components/ModeratorNotesPostModal', ['flarum/components/Modal', 'flarum/components/Button'], function (_export, _context) {
   var Modal, Button, ModeratePostModal;
   return {
     setters: [function (_flarumComponentsModal) {
-      Modal = _flarumComponentsModal['default'];
+      Modal = _flarumComponentsModal.default;
     }, function (_flarumComponentsButton) {
-      Button = _flarumComponentsButton['default'];
+      Button = _flarumComponentsButton.default;
     }],
     execute: function () {
-      ModeratePostModal = (function (_Modal) {
+      ModeratePostModal = function (_Modal) {
         babelHelpers.inherits(ModeratePostModal, _Modal);
 
         function ModeratePostModal() {
           babelHelpers.classCallCheck(this, ModeratePostModal);
-          babelHelpers.get(Object.getPrototypeOf(ModeratePostModal.prototype), 'constructor', this).apply(this, arguments);
+          return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ModeratePostModal).apply(this, arguments));
         }
 
         babelHelpers.createClass(ModeratePostModal, [{
@@ -94,11 +91,36 @@ System.register('datitisev/moderator-notes/components/ModeratePostModal', ['flar
         }, {
           key: 'title',
           value: function title() {
-            return app.translator.trans('datitisev-moderator-notes.moderate_post.title');
+            return app.translator.trans('datitisev-moderator-notes.forum.moderate_post.title');
           }
         }, {
           key: 'content',
           value: function content() {
+
+            if (this.success) {
+              return m(
+                'div',
+                { className: 'Modal-body' },
+                m(
+                  'div',
+                  { className: 'Form Form--centered' },
+                  m(
+                    'p',
+                    { className: 'helpText' },
+                    app.translator.trans('datitisev-moderator-notes.forum.moderate_post.confirmation_message')
+                  ),
+                  m(
+                    'div',
+                    { className: 'Form-group' },
+                    m(
+                      Button,
+                      { className: 'Button Button--primary Button--block', onclick: this.hide.bind(this) },
+                      app.translator.trans('datitisev-moderator-notes.forum.moderate_post.dismiss_button')
+                    )
+                  )
+                )
+              );
+            }
 
             return m(
               'div',
@@ -121,6 +143,7 @@ System.register('datitisev/moderator-notes/components/ModeratePostModal', ['flar
                         null,
                         app.translator.trans('datitisev-moderator-notes.forum.moderate_post.reason.off_topic_label')
                       ),
+                      m('br', null),
                       app.translator.trans('datitisev-moderator-notes.forum.moderate_post.reason.off_topic_text')
                     ),
                     m(
@@ -132,7 +155,20 @@ System.register('datitisev/moderator-notes/components/ModeratePostModal', ['flar
                         null,
                         app.translator.trans('datitisev-moderator-notes.forum.moderate_post.reason.innapropiate_label')
                       ),
+                      m('br', null),
                       app.translator.trans('datitisev-moderator-notes.forum.moderate_post.reason.innapropiate_text')
+                    ),
+                    m(
+                      'label',
+                      { className: 'checkbox' },
+                      m('input', { type: 'radio', name: 'reason', checked: this.reason() === 'spam', value: 'spam', onclick: m.withAttr('value', this.reason) }),
+                      m(
+                        'strong',
+                        null,
+                        app.translator.trans('datitisev-moderator-notes.forum.moderate_post.reason.spam_label')
+                      ),
+                      m('br', null),
+                      app.translator.trans('datitisev-moderator-notes.forum.moderate_post.reason.spam_text')
                     ),
                     m(
                       'label',
@@ -142,8 +178,7 @@ System.register('datitisev/moderator-notes/components/ModeratePostModal', ['flar
                         'strong',
                         null,
                         app.translator.trans('datitisev-moderator-notes.forum.moderate_post.reason.other_label')
-                      ),
-                      app.translator.trans('datitisev-moderator-notes.forum.moderate_post.reason.other_text')
+                      )
                     )
                   )
                 ),
@@ -162,7 +197,7 @@ System.register('datitisev/moderator-notes/components/ModeratePostModal', ['flar
         }, {
           key: 'onsubmit',
           value: function onsubmit(e) {
-            var _this = this;
+            var _this2 = this;
 
             e.preventDefault();
 
@@ -176,30 +211,82 @@ System.register('datitisev/moderator-notes/components/ModeratePostModal', ['flar
                 post: this.props.post
               }
             }).then(function () {
-              return _this.success = true;
-            })['catch'](function () {}).then(this.loaded.bind(this));
+              return _this2.success = true;
+            }).catch(function (e) {
+              console.error(e);
+            }).then(this.loaded.bind(this));
           }
         }]);
         return ModeratePostModal;
-      })(Modal);
+      }(Modal);
 
       _export('default', ModeratePostModal);
     }
   };
 });;
-System.register("datitisev/moderator-notes/components/models/ModeratorNotes", [], function (_export) {
-  "use strict";
+'use strict';
 
+System.register('datitisev/moderator-notes/main', ['flarum/app', 'flarum/Model', 'datitisev/moderator-notes/models/ModeratorNotes', 'datitisev/moderator-notes/addModerateAction'], function (_export, _context) {
+  var app, Model, ModeratorNotes, addModerateAction;
   return {
-    setters: [],
-    execute: function () {}
+    setters: [function (_flarumApp) {
+      app = _flarumApp.default;
+    }, function (_flarumModel) {
+      Model = _flarumModel.default;
+    }, function (_datitisevModeratorNotesModelsModeratorNotes) {
+      ModeratorNotes = _datitisevModeratorNotesModelsModeratorNotes.default;
+    }, function (_datitisevModeratorNotesAddModerateAction) {
+      addModerateAction = _datitisevModeratorNotesAddModerateAction.default;
+    }],
+    execute: function () {
+
+      app.initializers.add('datitisev-moderator-notes', function () {
+
+        app.store.models.posts.prototype.moderatorNotes = Model.hasMany('moderatorNotes');
+        app.store.models.posts.prototype.canModerate = Model.hasMany('canModerate');
+
+        app.store.models.moderatorNotes = ModeratorNotes;
+
+        addModerateAction();
+      });
+    }
   };
 });;
-System.register("datitisev/moderator-notes/models/ModeratorNotes.js/ModeratorNotes", [], function (_export) {
-  "use strict";
+'use strict';
 
+System.register('datitisev/moderator-notes/models/ModeratorNotes', ['flarum/Model', 'flarum/utils/mixin'], function (_export, _context) {
+  var Model, mixin, ModeratorNotes;
   return {
-    setters: [],
-    execute: function () {}
+    setters: [function (_flarumModel) {
+      Model = _flarumModel.default;
+    }, function (_flarumUtilsMixin) {
+      mixin = _flarumUtilsMixin.default;
+    }],
+    execute: function () {
+      ModeratorNotes = function (_Model) {
+        babelHelpers.inherits(ModeratorNotes, _Model);
+
+        function ModeratorNotes() {
+          babelHelpers.classCallCheck(this, ModeratorNotes);
+          return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ModeratorNotes).apply(this, arguments));
+        }
+
+        return ModeratorNotes;
+      }(Model);
+
+      ;
+
+      babelHelpers.extends(ModeratorNotes.prototype, {
+        type: Model.attribute('type'),
+        reason: Model.attribute('reason'),
+        reasonDetail: Model.attribute('reasonDetail'),
+        time: Model.attribute('time', Model.transformDate),
+
+        post: Model.hasOne('post'),
+        user: Model.hasOne('user')
+      });
+
+      _export('default', ModeratorNotes);
+    }
   };
 });

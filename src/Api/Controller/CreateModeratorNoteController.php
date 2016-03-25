@@ -4,8 +4,8 @@ namespace Datitisev\ModeratorNotes\Api\Controller;
 
 use Datitisev\ModeratorNotes\ModeratorNotes;
 use Flarum\Api\Controller\AbstractCreateController;
-//use Datitisev\ModeratorNotes\Api\Serializer\ModeratorNoteSerializer;
-//use Datitisev\ModeratorNotes\Command\CreateModeratorNote;
+use Datitisev\ModeratorNotes\Api\Serializer\ModeratorNoteSerializer;
+use Datitisev\ModeratorNotes\Command\CreateModeratorNote;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;

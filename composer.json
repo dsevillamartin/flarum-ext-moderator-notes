@@ -3,11 +3,16 @@
   "description": "Show Moderation Notes!",
   "type": "flarum-extension",
   "require": {
-    "flarum/core": "dev-master"
+    "flarum/core": "dev-master",
+    "datitisev/flarum-ext-moderator-notes": "*@dev"
   },
   "extra": {
     "flarum-extension": {
-      "title": "Moderation Notes"
+      "title": "Moderation Notes",
+      "icon": {
+        "backgroundColor": "#5e8e14",
+        "color": "#fff"
+      }
     }
   },
   "autoload": {

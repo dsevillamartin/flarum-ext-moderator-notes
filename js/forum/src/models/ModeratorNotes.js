@@ -1,5 +1,5 @@
 import Model from 'flarum/Model';
-// import mixin from 'flarum/utils/mixin';
+import mixin from 'flarum/utils/mixin';
 
 class ModeratorNotes extends Model {};
 

@@ -10,7 +10,6 @@ export default function () {
   extend(CommentPost.prototype, 'actionItems', function(items) {
 
     const post = this.props.post;
-    console.log(post);
 
     items.add('moderator-notes', Button.component({
       children: app.translator.trans('datitisev-moderator-notes.forum.post.moderate_button'),
