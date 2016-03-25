@@ -281,6 +281,7 @@ System.register('datitisev/moderator-notes/models/ModeratorNotes', ['flarum/Mode
         reason: Model.attribute('reason'),
         reasonDetail: Model.attribute('reasonDetail'),
         time: Model.attribute('time', Model.transformDate),
+        moderatorNotesCount: Model.attribute('moderatorNotesCount'),
 
         post: Model.hasOne('post'),
         user: Model.hasOne('user')

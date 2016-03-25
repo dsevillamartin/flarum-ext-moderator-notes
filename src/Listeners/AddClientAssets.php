@@ -50,10 +50,7 @@ class AddClientAssets
     public function addLocales(ConfigureLocales $event)
     {
         foreach (new DirectoryIterator(__DIR__.'/../../locale') as $file) {
-            app('log')->debug('File Extension:');
-            app('log')->debug($file->getExtension());
             if ($file->isFile() && in_array($file->getExtension(), ['yml', 'yaml'])) {
-                app('log')->debug('The check for the file '.$file.' passed!');
                 $event->locales->addTranslations($file->getBasename('.'.$file->getExtension()), $file->getPathname());
             }
         }

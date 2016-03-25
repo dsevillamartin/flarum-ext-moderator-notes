@@ -62,16 +62,15 @@ class AddModeratorNotesApi
     public function prepareApiAttributes(PrepareApiAttributes $event)
     {
         if ($event->isSerializer(ForumSerializer::class)) {
-            $event->attributes['canViewModeratorNotes'] = $event->actor->hasPermissionLike('discussion.viewModeratorNotes');
-            if ($event->attributes['canViewModeratorNotes']) {
-                $event->attributes['moderatorNotesCount'] = (int) $this->getModeratorNotesCount($event->actor);
-            }
+            $event->attributes['canViewModeratorNotes'] = true;
+            $event->attributes['moderatorNotesCount'] = (int) $this->getModeratorNotesCount($event->actor);
         }
         if ($event->isSerializer(CurrentUserSerializer::class)) {
             $event->attributes['newModeratorNotesCount'] = (int) $this->getNewModeratorNotesCount($event->model);
         }
         if ($event->isSerializer(PostSerializer::class)) {
             $event->attributes['canModerateNotes'] = $event->actor->can('moderateNotes', $event->model);
+
         }
     }
 
