@@ -1,7 +1,17 @@
 <?php
 
+/*
+ * (c) David Sevilla Martín <dsevilla192@icloud.com
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Datitisev\ModeratorNotes\Listeners;
 
+use Datitisev\ModeratorNotes\Api\Controller\CreateModeratorNoteController;
+use Datitisev\ModeratorNotes\Api\Serializer\ModeratorNoteSerializer;
+use Datitisev\ModeratorNotes\ModeratorNotes;
 use Flarum\Api\Controller;
 use Flarum\Api\Serializer\PostSerializer;
 use Flarum\Core\Post;
@@ -10,14 +20,11 @@ use Flarum\Event\GetApiRelationship;
 use Flarum\Event\GetModelRelationship;
 use Flarum\Event\PostWasDeleted;
 use Flarum\Event\PrepareApiData;
-use Datitisev\ModeratorNotes\Api\Controller\CreateModeratorNoteController;
-use Datitisev\ModeratorNotes\Api\Serializer\ModeratorNoteSerializer;
-use Datitisev\ModeratorNotes\ModeratorNotes;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Collection;
 
-class AddPostModeratorNotesRelationship {
-
+class AddPostModeratorNotesRelationship
+{
     /**
      * @param Dispatcher $events
      */
@@ -32,6 +39,7 @@ class AddPostModeratorNotesRelationship {
 
     /**
      * @param GetModelRelationship $event
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|null
      */
     public function getModelRelationship(GetModelRelationship $event)
@@ -51,6 +59,7 @@ class AddPostModeratorNotesRelationship {
 
     /**
      * @param GetApiRelationship $event
+     *
      * @return \Tobscure\JsonApi\Relationship|null
      */
     public function getApiRelationship(GetApiRelationship $event)
@@ -68,7 +77,7 @@ class AddPostModeratorNotesRelationship {
         if ($event->isController(Controller\ShowDiscussionController::class)) {
             $event->addInclude([
                 'posts.moderatorNotes',
-                'posts.moderatorNotes.user'
+                'posts.moderatorNotes.user',
             ]);
         }
 
@@ -76,7 +85,7 @@ class AddPostModeratorNotesRelationship {
             || $event->isController(Controller\ShowPostController::class)) {
             $event->addInclude([
                 'moderatorNotes',
-                'moderatorNotes.user'
+                'moderatorNotes.user',
             ]);
         }
     }
@@ -126,5 +135,4 @@ class AddPostModeratorNotesRelationship {
             }
         }
     }
-
 }

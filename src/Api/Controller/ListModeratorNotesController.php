@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * (c) David Sevilla Martín <dsevilla192@icloud.com
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Datitisev\ModeratorNotes\Api\Controller;
 
-use Flarum\Api\Controller\AbstractCollectionController;
 use Datitisev\ModeratorNotes\Api\Serializer\ModeratorNoteSerializer;
 use Datitisev\ModeratorNotes\ModeratorNotes;
+use Flarum\Api\Controller\AbstractCollectionController;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
-
 
 class ListModeratorNotesController extends AbstractCollectionController
 {
@@ -23,7 +29,7 @@ class ListModeratorNotesController extends AbstractCollectionController
         'user',
         'post',
         'post.user',
-        'post.discussion'
+        'post.discussion',
     ];
 
     /**
@@ -34,6 +40,7 @@ class ListModeratorNotesController extends AbstractCollectionController
         $actor = $request->getAttribute('actor');
         $actor->moderatorNotes_read_time = time();
         $actor->save();
+
         return ModeratorNotes::whereVisibleTo($actor)
             ->with($this->extractInclude($request))
             ->latest('moderatorNotes.time')
