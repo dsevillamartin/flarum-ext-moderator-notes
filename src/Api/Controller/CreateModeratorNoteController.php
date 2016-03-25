@@ -10,9 +10,8 @@ use Illuminate\Contracts\Bus\Dispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
-
-class CreateModeratorNoteController extends AbstractCreateController {
-
+class CreateModeratorNoteController extends AbstractCreateController
+{
     /**
      * {@inheritdoc}
      */
@@ -23,7 +22,7 @@ class CreateModeratorNoteController extends AbstractCreateController {
      */
     public $include = [
         'post',
-        'post.moderatorNotes'
+        'post.moderatorNotes',
     ];
 
     /**
@@ -48,5 +47,4 @@ class CreateModeratorNoteController extends AbstractCreateController {
             new CreateModeratorNote($request->getAttribute('actor'), array_get($request->getParsedBody(), 'data', []))
         );
     }
-
 }
