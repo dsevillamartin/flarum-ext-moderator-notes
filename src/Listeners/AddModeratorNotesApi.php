@@ -70,7 +70,6 @@ class AddModeratorNotesApi
         }
         if ($event->isSerializer(PostSerializer::class)) {
             $event->attributes['canModerateNotes'] = $event->actor->can('moderateNotes', $event->model);
-
         }
     }
 
