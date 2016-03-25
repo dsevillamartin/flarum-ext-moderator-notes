@@ -32,7 +32,7 @@ class CreateModeratorNoteHandler
     }
 
     /**
-     * @param CreateFlag $command
+     * @param CreateModeratorNote $command
      *
      * @throws InvalidParameterException
      *

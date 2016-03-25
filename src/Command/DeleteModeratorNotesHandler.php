@@ -47,7 +47,7 @@ class DeleteModeratorNotesHandler
     {
         $actor = $command->actor;
         $post = $this->posts->findOrFail($command->postId, $actor);
-        $this->assertCan($actor, 'viewFlags', $post->discussion);
+        $this->assertCan($actor, 'viewModeratorNotes', $post->discussion);
         $this->events->fire(new ModeratorNotesWillBeDeleted($post, $actor, $command->data));
         $post->moderatorNotes()->delete();
 

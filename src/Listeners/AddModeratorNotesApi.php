@@ -10,6 +10,7 @@
 namespace Datitisev\ModeratorNotes\Listeners;
 
 use Datitisev\ModeratorNotes\ModeratorNotes;
+use Datitisev\ModeratorNotes\Api\Controller;
 use Flarum\Api\Serializer\CurrentUserSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Api\Serializer\PostSerializer;
@@ -65,7 +66,6 @@ class AddModeratorNotesApi
             if ($event->attributes['canViewModeratorNotes']) {
                 $event->attributes['moderatorNotesCount'] = (int) $this->getModeratorNotesCount($event->actor);
             }
-//            $event->attributes['guidelinesUrl'] = $this->settings->get('flarum-flags.guidelines_url');
         }
         if ($event->isSerializer(CurrentUserSerializer::class)) {
             $event->attributes['newModeratorNotesCount'] = (int) $this->getNewModeratorNotesCount($event->model);
