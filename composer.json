@@ -3,8 +3,7 @@
   "description": "Show Moderation Notes!",
   "type": "flarum-extension",
   "require": {
-    "flarum/core": "dev-master",
-    "datitisev/flarum-ext-moderator-notes": "*@dev"
+    "flarum/core": "dev-master"
   },
   "extra": {
     "flarum-extension": {

@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a727985-f910-4741-9114-f229b75bb06d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/datitisev-moderator-notes.iml" afterPath="$PROJECT_DIR$/.idea/datitisev-moderator-notes.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap.php" afterPath="$PROJECT_DIR$/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Controller/CreateModeratorNoteController.php" afterPath="$PROJECT_DIR$/src/Api/Controller/CreateModeratorNoteController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Command/CreateModeratorNoteHandler.php" afterPath="$PROJECT_DIR$/src/Command/CreateModeratorNoteHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Command/DeleteModeratorNotesHandler.php" afterPath="$PROJECT_DIR$/src/Command/DeleteModeratorNotesHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Listeners/AddModeratorNotesApi.php" afterPath="$PROJECT_DIR$/src/Listeners/AddModeratorNotesApi.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Api/Controller/ListModeratorNotesController.php" afterPath="$PROJECT_DIR$/src/Api/Controller/ListModeratorNotesController.php" />
     </list>
     <ignored path="datitisev-moderator-notes.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,8 +39,8 @@
       <file leaf-file-name="ListModeratorNotesController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Api/Controller/ListModeratorNotesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+            <state relative-caret-position="540">
+              <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
               <folding>
                 <element signature="e#59#114#0#PHP" expanded="true" />
               </folding>
@@ -475,12 +469,12 @@
       <workItem from="1458830497860" duration="171000" />
       <workItem from="1458830727942" duration="10993000" />
       <workItem from="1458912515844" duration="868000" />
-      <workItem from="1458913624714" duration="658000" />
+      <workItem from="1458913624714" duration="778000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14852000" />
+    <option name="totallyTimeSpent" value="14972000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="23" width="1920" height="1057" extended-state="6" />
@@ -901,8 +895,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Api/Controller/ListModeratorNotesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        <state relative-caret-position="540">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
           <folding>
             <element signature="e#59#114#0#PHP" expanded="true" />
           </folding>

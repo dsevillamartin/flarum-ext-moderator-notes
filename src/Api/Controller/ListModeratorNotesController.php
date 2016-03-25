@@ -34,7 +34,7 @@ class ListModeratorNotesController extends AbstractCollectionController
         $actor = $request->getAttribute('actor');
         $actor->moderatorNotes_read_time = time();
         $actor->save();
-        return Flag::whereVisibleTo($actor)
+        return ModeratorNotes::whereVisibleTo($actor)
             ->with($this->extractInclude($request))
             ->latest('moderatorNotes.time')
             ->groupBy('post_id')
