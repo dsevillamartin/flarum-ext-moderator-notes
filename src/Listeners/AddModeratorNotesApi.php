@@ -1,7 +1,15 @@
 <?php
 
+/*
+ * (c) David Sevilla Martín <dsevilla192@icloud.com
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Datitisev\ModeratorNotes\Listeners;
 
+use Datitisev\ModeratorNotes\ModeratorNotes;
 use Flarum\Api\Serializer\CurrentUserSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Api\Serializer\PostSerializer;
@@ -9,17 +17,15 @@ use Flarum\Core\User;
 use Flarum\Event\ConfigureApiRoutes;
 use Flarum\Event\ConfigureModelDates;
 use Flarum\Event\PrepareApiAttributes;
-use Datitisev\ModeratorNotes\ModeratorNotes;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class AddModeratorNotesApi {
-
+class AddModeratorNotesApi
+{
     /**
      * @var SettingsRepositoryInterface
      */
     protected $settings;
-
 
     /**
      * @param SettingsRepositoryInterface $settings
@@ -28,7 +34,6 @@ class AddModeratorNotesApi {
     {
         $this->settings = $settings;
     }
-
 
     /**
      * @param Dispatcher $events
@@ -40,7 +45,6 @@ class AddModeratorNotesApi {
         $events->listen(ConfigureApiRoutes::class, [$this, 'configureApiRoutes']);
     }
 
-
     /**
      * @param ConfigureModelDates $event
      */
@@ -50,7 +54,6 @@ class AddModeratorNotesApi {
             $event->dates[] = 'moderatorNotes_read_time';
         }
     }
-
 
     /**
      * @param PrepareApiAttributes $event
@@ -72,7 +75,6 @@ class AddModeratorNotesApi {
         }
     }
 
-
     /**
      * @param ConfigureApiRoutes $event
      */
@@ -83,9 +85,9 @@ class AddModeratorNotesApi {
         $event->delete('/posts/{id}/moderatorNotes', 'moderatorNotes.delete', Controller\DeleteModeratorNotesController::class);
     }
 
-
     /**
      * @param User $actor
+     *
      * @return int
      */
     protected function getModeratorNotesCount(User $actor)
@@ -93,9 +95,9 @@ class AddModeratorNotesApi {
         return ModeratorNotes::whereVisibleTo($actor)->distinct()->count('moderatorNotes.post_id');
     }
 
-
     /**
      * @param User $actor
+     *
      * @return int
      */
     protected function getNewModeratorNotesCount(User $actor)
@@ -104,7 +106,7 @@ class AddModeratorNotesApi {
         if ($time = $actor->moderatorNotes_read_time) {
             $query->where('moderatorNotes.time', '>', $time);
         }
+
         return $query->distinct()->count('moderatorNotes.post_id');
     }
-
 }
