@@ -1,0 +1,19 @@
+datitisev-moderator-notes:
+  forum:
+    post:
+      moderate_button: Yönetim Notları
+
+
+    moderate_post:
+      title: Yazıyı Yönet
+      submit_button: Yönetim Notu Ekle
+      dismiss_button: => core.ref.okay
+
+      reason:
+        off_topic_label: "Konu dışı"
+        off_topic_text: Bu yazı bu konuya uygun değil veya başka bir yere alınmalı.
+        inappropriate_label: Uygunsuz
+        inappropriate_text: "Bu yazı saldırgan, uygunsuz ve <a>topluluk kurallarımızı</a> ihlal ediyor."
+        other_label: Diğer
+        spam_label: Spam
+spam_text: Bu yazı bir reklam.
